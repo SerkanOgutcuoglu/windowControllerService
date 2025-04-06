@@ -1,66 +1,75 @@
 # 🪄 WindowsServiceProject
 
-Bu proje, bir **Windows Servisi** aracılığıyla kullanıcı oturumunda çalışan ayrı bir konsol uygulaması başlatmayı amaçlar. Konsol uygulaması, aktif pencere üzerinde belirli GUI işlemleri gerçekleştirir ve işini tamamladıktan sonra otomatik olarak kapanır.
+Bu proje, **Windows servislerinin GUI (grafik arayüz) işlemlerini doğrudan gerçekleştirememesi** kısıtını aşmak amacıyla geliştirilmiştir. Normal şartlarda Windows servisleri sistemin arka planında çalışır ve güvenlik nedeniyle doğrudan kullanıcı oturumu ile etkileşime geçemezler. Örneğin; aktif pencerenin başlığını almak, pencereyi küçültmek veya bir butona tıklamak gibi işlemler servisler tarafından doğrudan yapılamaz.
+
+Bu nedenle, bu projede aşağıdaki yaklaşım uygulanmıştır:
+
+- Windows Servisi sadece arka planda çalışır ve GUI işlemleri yapmaz.
+- Servis, kullanıcı oturumunda çalışacak ayrı bir **konsol uygulaması** başlatır.
+- Konsol uygulaması, kullanıcının oturumunda çalıştığı için pencere ile etkileşime geçebilir (örneğin pencere başlığını alabilir).
+- İşlemler tamamlandığında konsol uygulaması kendini kapatır.
 
 ---
 
-## 📌 Amaç
+## 📁 Proje Yapısı
 
-- Servisler doğrudan kullanıcı arayüzüyle etkileşemez.
-- Bu proje, bu kısıtı aşmak için kullanıcı oturumunda ayrı bir uygulama başlatarak GUI işlemlerini dışarıdan yapmayı hedefler.
-
----
-
-## 🧱 Proje Yapısı
-
-WindowsServiceProject/ ├── WindowControlService/ # Windows servisi │ └── Controller.cs │ ├── windowController/ # Konsol uygulaması │ └── Program.cs │ └── README.md
-
-yaml
-Kopyala
-Düzenle
+```
+WindowsServiceProject/
+├── WindowControlService/        # Servis projesi
+│   └── Controller.cs
+│
+├── windowController/            # Konsol uygulaması (GUI işlemlerini yapar)
+│   └── Program.cs
+│
+└── README.md
+```
 
 ---
 
-## 🔧 Temel Özellikler
+## 🎯 Amaç
 
-- Aktif kullanıcı oturumu tespit edilir.
-- Kullanıcı oturumunda ayrı bir uygulama başlatılır.
-- Konsol uygulaması belirlenen işlemleri gerçekleştirir:
-  - Örn: aktif pencereyi kontrol etme, başlığını alma, dosyaya yazma vb.
-- İşlem tamamlandığında konsol uygulaması otomatik olarak kapanır.
-
----
-
-## 🧠 Teknik Notlar
-
-- Servis ve kullanıcı oturumu arasında güvenli bir şekilde işlem başlatmak için Windows API’lerinden faydalanılır.
-- Servisin, ayrıcalıklı modda çalışması gerekebilir (örneğin `LocalSystem` hesabı).
-- Konsol uygulaması, GUI işlemleri gerçekleştirecek şekilde kullanıcı modunda çalışır.
+- Servisler GUI işlemleri gerçekleştiremediği için bu görev kullanıcı tarafında çalışan ayrı bir uygulamaya devredilir.
+- Kullanıcının aktif oturumu tespit edilir.
+- Konsol uygulaması bu oturumda başlatılır.
+- Konsol uygulaması GUI işlemlerini yapar ve kapatılır.
 
 ---
 
-## 📋 Gereksinimler
+## 🚀 Temel Özellikler
 
-- .NET Framework veya .NET Core/6+
-- Visual Studio (tavsiye edilen IDE)
-- Windows 10 veya üstü
-- Yükleme ve çalıştırma için yönetici (admin) izni
-
----
-
-## ⚠️ Uyarılar
-
-- Windows servisleri GUI işlemlerini doğrudan yapamaz. Bu sebeple aracı bir uygulama gerekir.
-- Microsoft tarafından servislerin etkileşimli oturumla çalışması önerilmemektedir. Bu çözüm, özel amaçlı senaryolar içindir.
+- Aktif pencerenin başlığı alınır.
+- Bu başlık bir `.txt` dosyasına kaydedilir.
+- Konsol uygulaması işlem bittiğinde kendini otomatik olarak kapatır.
 
 ---
 
-## 📝 Lisans
+## ⚙️ Gereksinimler
 
-Bu proje MIT lisansı ile lisanslanmıştır. Dilediğiniz gibi kullanabilir ve geliştirebilirsiniz.
+- .NET Framework 4.7.2 veya .NET 6+
+- Visual Studio
+- Windows 10 veya üzeri
+- Yönetici (admin) yetkisi
 
 ---
 
-## 🙋 Katkı
+## 📦 Kurulum
 
-Katkı sağlamak isterseniz, `issue` açabilir veya `pull request` gönderebilirsiniz. Her türlü öneri ve geri bildirim memnuniyetle karşılanır!
+1. `windowController` projesini build edin ve çıktısını `WindowControlService` klasörüne kopyalayın.
+2. `WindowControlService` projesini build edin.
+3. Aşağıdaki komutları kullanarak servisi kurun ve başlatın:
+
+```bash
+sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
+sc start WindowControlService
+```
+
+> Not: Yol bilgisini kendi sisteminize göre ayarlayın.
+
+---
+
+## 🧠 Teknik Açıklama
+
+- Windows servisleri session 0'da çalışır, oysa kullanıcı arayüzü session 1 veya üstünde çalışır.
+- `WTSGetActiveConsoleSessionId` ile aktif oturum ID’si alınır.
+- `CreateProcessAsUser` fonksiyonu kullanılarak bu oturumda işlem başlatılır.
+- Konsol uygulaması `GetForegroundWindow` ve `GetWindowText` gibi API’lerle pencere bilgilerini alır.
