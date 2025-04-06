@@ -94,9 +94,19 @@ Bu işlem sayesinde servis, kullanıcı oturumunda bir uygulama başlatmış olu
 - `CreateProcessAsUser` fonksiyonu kullanılarak bu oturumda işlem başlatılır.
 - Konsol uygulaması `GetForegroundWindow` ve `GetWindowText` gibi API’lerle pencere bilgilerini alır.
 
+🚀 Çalıştırma Talimatları
+Kod içerisindeki path'leri kendi sisteminize göre ayarlayın.
+
+Servisi eklemek için aşağıdaki komutları kullanın:
+
+bash
+sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
+sc start WindowControlService
 
 
+Servisi başlattığınızda, konsol uygulaması açılacak ve mevcut pencere küçülüp büyüyecektir, ardından kapanacaktır.
 
+Bu basit uygulama, GUI işlemleri yapabilen servisler için bir temel oluşturur ve daha karmaşık algoritmalar geliştirebilmenize yardımcı olabilir.
 
 **********----**********
 
@@ -191,20 +201,14 @@ A process is started in this session using the CreateProcessAsUser function.
 
 The console application uses APIs like GetForegroundWindow and GetWindowText to retrieve window information.
 
+**---**
 
-
-## 🚀 How It Works
-
-1. **Adjust the paths in the code to match your system.**
-2. To add the service, use the following command:
-   ```bash
-   sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
-Start the service:
+Adjust the paths in the code to match your system.
+To add the service, use the following command:
 
 bash
-Kopyala
-Düzenle
+sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
 sc start WindowControlService
-When the service starts, the console application will open, the active window will minimize and maximize, and then the application will close.
 
+When the service starts, the console application will open, the active window will minimize and maximize, and then the application will close.
 This simple application serves as a foundation for creating services that can perform GUI operations and can help you build more complex algorithms in the future.
