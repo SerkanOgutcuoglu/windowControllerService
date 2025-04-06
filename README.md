@@ -100,9 +100,10 @@ Kod içerisindeki path'leri kendi sisteminize göre ayarlayın.
 Servisi eklemek için aşağıdaki komutları kullanın:
 
 bash
+```
 sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
 sc start WindowControlService
-
+```
 
 Servisi başlattığınızda, konsol uygulaması açılacak ve mevcut pencere küçülüp büyüyecektir, ardından kapanacaktır.
 
