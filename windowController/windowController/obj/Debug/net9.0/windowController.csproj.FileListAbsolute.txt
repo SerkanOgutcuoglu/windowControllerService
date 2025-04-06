@@ -1,0 +1,14 @@
+C:\Users\Serkan\source\repos\windowController\windowController\bin\Debug\net9.0\windowController.exe
+C:\Users\Serkan\source\repos\windowController\windowController\bin\Debug\net9.0\windowController.deps.json
+C:\Users\Serkan\source\repos\windowController\windowController\bin\Debug\net9.0\windowController.runtimeconfig.json
+C:\Users\Serkan\source\repos\windowController\windowController\bin\Debug\net9.0\windowController.dll
+C:\Users\Serkan\source\repos\windowController\windowController\bin\Debug\net9.0\windowController.pdb
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.AssemblyInfoInputs.cache
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.AssemblyInfo.cs
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.csproj.CoreCompileInputs.cache
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.dll
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\refint\windowController.dll
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.pdb
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\windowController.genruntimeconfig.cache
+C:\Users\Serkan\source\repos\windowController\windowController\obj\Debug\net9.0\ref\windowController.dll

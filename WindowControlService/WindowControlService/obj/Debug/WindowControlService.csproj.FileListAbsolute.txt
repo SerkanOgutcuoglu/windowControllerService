@@ -1,0 +1,7 @@
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\bin\Debug\WindowControlService.exe.config
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\bin\Debug\WindowControlService.exe
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\bin\Debug\WindowControlService.pdb
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\obj\Debug\WindowControlService.csproj.AssemblyReference.cache
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\obj\Debug\WindowControlService.csproj.CoreCompileInputs.cache
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\obj\Debug\WindowControlService.exe
+C:\Users\Serkan\source\repos\WindowControlService\WindowControlService\obj\Debug\WindowControlService.pdb
