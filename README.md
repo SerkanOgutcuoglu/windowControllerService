@@ -165,7 +165,7 @@ Düzenle
 2. Build the `WindowControlService` project.
 3. Install and start the service using the following commands:
 
-
+'''bash
 sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
 sc start WindowControlService
 Note: Adjust the path to your system.
