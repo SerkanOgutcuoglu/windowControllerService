@@ -69,6 +69,26 @@ sc start WindowControlService
 
 ## 🧠 Teknik Açıklama
 
+### 💡 Windows'ta Oturum (Session) Yapısı
+
+Windows işletim sistemi, farklı kullanıcıların aynı anda oturum açmasına ve çalışmasına olanak tanır. Bu oturumlar, "Session" kavramıyla temsil edilir:
+
+- **Session 0**: Sistem servislerinin çalıştığı oturumdur. Tüm servisler burada izole şekilde çalışır. Grafik arayüzle (GUI) etkileşim kuramazlar.
+- **Session 1 ve üstü**: Kullanıcıların aktif olarak masaüstü ortamında çalıştığı oturumlardır. Kullanıcının başlattığı tüm uygulamalar (masaüstü, tarayıcı, vs.) bu oturumlarda çalışır.
+
+2006'dan itibaren (Windows Vista ve sonrası), **Session 0 Isolation** adlı güvenlik özelliği sayesinde servisler kullanıcı arayüzüyle doğrudan iletişim kuramaz hâle gelmiştir. Bu güvenlik önlemi, kötü amaçlı servislerin kullanıcıyla etkileşimini engellemek için getirilmiştir.
+
+### 🔄 Oturumlar Arası İletişim
+
+Servisin kullanıcı oturumunda işlem başlatabilmesi için aşağıdaki adımlar izlenir:
+
+1. `WTSGetActiveConsoleSessionId()` ile aktif kullanıcı oturumunun ID'si alınır.
+2. Bu oturumun erişim yetkileri `WTSQueryUserToken` ile elde edilir.
+3. Kullanıcı token’ı birincil token’a dönüştürülür (gerekirse `DuplicateTokenEx` kullanılır).
+4. `CreateProcessAsUser()` fonksiyonu ile bu oturumda çalışan bir işlem başlatılır.
+
+Bu işlem sayesinde servis, kullanıcı oturumunda bir uygulama başlatmış olur ve GUI işlemleri bu uygulama tarafından gerçekleştirilir.
+
 - Windows servisleri session 0'da çalışır, oysa kullanıcı arayüzü session 1 veya üstünde çalışır.
 - `WTSGetActiveConsoleSessionId` ile aktif oturum ID’si alınır.
 - `CreateProcessAsUser` fonksiyonu kullanılarak bu oturumda işlem başlatılır.
