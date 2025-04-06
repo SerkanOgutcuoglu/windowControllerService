@@ -165,7 +165,7 @@ Düzenle
 2. Build the `WindowControlService` project.
 3. Install and start the service using the following commands:
 
-'''bash
+
 sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
 sc start WindowControlService
 Note: Adjust the path to your system.
@@ -207,8 +207,9 @@ Adjust the paths in the code to match your system.
 To add the service, use the following command:
 
 bash
+```
 sc create WindowControlService binPath= "C:\Path\To\WindowControlService.exe"
 sc start WindowControlService
-
+```
 When the service starts, the console application will open, the active window will minimize and maximize, and then the application will close.
 This simple application serves as a foundation for creating services that can perform GUI operations and can help you build more complex algorithms in the future.
